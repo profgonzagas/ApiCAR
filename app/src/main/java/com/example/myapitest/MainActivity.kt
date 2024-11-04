@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         // TODO
     }
 
+
     private fun fetchItems() {
         // Alterando execução para IO thread
         CoroutineScope(Dispatchers.IO).launch {
@@ -66,4 +67,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 }
