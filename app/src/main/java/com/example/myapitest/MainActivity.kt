@@ -1,10 +1,14 @@
 package com.example.myapitest
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapitest.databinding.ActivityMainBinding
 
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapitest.model.Car
+import com.example.myapitest.adapter.CarItemAdapter
 
 import com.example.myapitest.service.Result
 import com.example.myapitest.service.RetrofitClient
@@ -53,6 +57,13 @@ class MainActivity : AppCompatActivity() {
         // TODO
     }
 
+    private fun handleFetchSuccess(data: List<Car>) {
+        Log.d("API", data.toString())
+        val adapter = CarItemAdapter(data) {
+           // startActivity(CarDetailActivity.newIntent(this, it.id))
+        }
+        binding.recyclerView.adapter = adapter
+    }
 
     private fun fetchItems() {
         // Alterando execução para IO thread
@@ -61,8 +72,12 @@ class MainActivity : AppCompatActivity() {
             // Alterando execução para Main thread
             withContext(Dispatchers.Main) {
                 when (result) {
-                    is Result.Error -> {}
-                    is Result.Success -> {}
+                    is Result.Error -> {Toast.makeText(
+                        this@MainActivity,
+                        "ERRO",
+                        Toast.LENGTH_LONG
+                    ).show()}
+                    is Result.Success -> {handleFetchSuccess(result.data)}
                 }
             }
         }

@@ -1,10 +1,15 @@
 package com.example.myapitest.model
 
 data class Car(
-    val id: String
-    //val value: CarValue
+    var id: String,
+    val imageUrl: String,
+    val year: String,
+    val name: String,
+    val licence: String,
+   // val place: Place
 )
-data class CarValue(
-    val id: String,
-    val value: Car
+
+data class RetrieveCar(
+    var id: String,
+    var value: Car
 )
