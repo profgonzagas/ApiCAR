@@ -1,14 +1,18 @@
 package com.example.myapitest.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.myapitest.R
 import com.example.myapitest.model.Car
+import com.squareup.picasso.Picasso
+
 //import com.example.myapitest.ui.loadUrl
 
 class CarItemAdapter(
@@ -17,7 +21,7 @@ class CarItemAdapter(
 ) : Adapter<CarItemAdapter.ItemViewHolder>() {
 
     class ItemViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        val imageView: ImageView = view.findViewById(R.id.image)
+        val imageView: ImageView = view.findViewById(R.id.imageUrl)
         val model: TextView = view.findViewById(R.id.model)
         val year: TextView = view.findViewById(R.id.year)
         val license: TextView = view.findViewById(R.id.license)
@@ -42,6 +46,26 @@ class CarItemAdapter(
         holder.model.text = car.name
         holder.year.text = car.year
         holder.license.text = car.licence
+
+
+
+        Picasso.get().setIndicatorsEnabled(true)
+         Picasso.get()
+             .load(car.imageUrl)
+             .error(R.drawable.ic_launcher_foreground) // Placeholder for errors
+             .fit()
+             .centerCrop()
+             .into(holder.imageView, object : com.squareup.picasso.Callback {
+                 override fun onSuccess() {
+                     Toast.makeText(holder.itemView.context, "Imagem carregada com sucesso", Toast.LENGTH_LONG).show()
+                 }
+
+                 override fun onError(e: Exception?) {
+                     //Log.e("Picasso", "Failed to load image", e)
+                     Toast.makeText(holder.itemView.context, "Falha ao carregar a imagem", Toast.LENGTH_LONG).show()
+                 }
+             })
+
     }
 
 
