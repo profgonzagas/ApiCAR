@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.myapitest.R
 import com.example.myapitest.model.Car
+import com.example.myapitest.ui.CircleTransform
 import com.squareup.picasso.Picasso
 
 //import com.example.myapitest.ui.loadUrl
@@ -52,7 +53,9 @@ class CarItemAdapter(
         Picasso.get().setIndicatorsEnabled(true)
          Picasso.get()
              .load(car.imageUrl)
-             .error(R.drawable.ic_launcher_foreground) // Placeholder for errors
+             .placeholder(R.drawable.ic_download)
+             .error(R.drawable.ic_error)
+             .transform(CircleTransform())
              .fit()
              .centerCrop()
              .into(holder.imageView, object : com.squareup.picasso.Callback {
