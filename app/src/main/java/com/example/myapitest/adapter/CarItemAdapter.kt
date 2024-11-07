@@ -18,6 +18,7 @@ import com.squareup.picasso.Picasso
 
 class CarItemAdapter(
     private val cars: List<Car>,
+
     private val carClickListener: (Car) -> Unit
 ) : Adapter<CarItemAdapter.ItemViewHolder>() {
 
@@ -40,6 +41,7 @@ class CarItemAdapter(
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val car = cars[position]
+
         holder.itemView.setOnClickListener{
             carClickListener.invoke(car)
         }
@@ -47,8 +49,6 @@ class CarItemAdapter(
         holder.model.text = car.name
         holder.year.text = car.year
         holder.license.text = car.licence
-
-
 
         Picasso.get().setIndicatorsEnabled(true)
          Picasso.get()

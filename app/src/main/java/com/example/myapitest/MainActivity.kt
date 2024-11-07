@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
     private fun handleFetchSuccess(data: List<Car>) {
         Log.d("API", data.toString())
         val adapter = CarItemAdapter(data) {
-           // startActivity(CarDetailActivity.newIntent(this, it.id))
+           startActivity(CarDetailActivity.newIntent(this, it.id))
         }
         binding.recyclerView.adapter = adapter
     }
