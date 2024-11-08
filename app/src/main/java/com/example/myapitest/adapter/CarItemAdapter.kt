@@ -1,6 +1,5 @@
 package com.example.myapitest.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,7 +47,7 @@ class CarItemAdapter(
        // holder.imageView.loadUrl(car.imageUrl)
         holder.model.text = car.name
         holder.year.text = car.year
-        holder.license.text = car.licence
+        holder.license.text = car.license
 
         Picasso.get().setIndicatorsEnabled(true)
          Picasso.get()
