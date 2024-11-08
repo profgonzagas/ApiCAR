@@ -12,6 +12,6 @@ interface ApiService {
     @GET("car/{id}")
     suspend fun retrieveCar(@Path("id") id: String): RetrieveCar
 
-    @DELETE("cars/{id}")
-    suspend fun deleteItem(@Path("id") id: String)
+    @DELETE("car/{id}")
+    suspend fun deleteCar(@Path("id") id: String)
 }

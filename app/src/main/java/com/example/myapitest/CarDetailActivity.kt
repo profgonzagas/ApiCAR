@@ -44,12 +44,15 @@ class CarDetailActivity : AppCompatActivity() {
         binding.toolbar.setNavigationOnClickListener {
             finish()
         }
+        binding.destroyCar.setOnClickListener{
+            deleteCar()
+        }
     }
 
 
 
 
-    private fun retrieveCar() {
+    private fun retrieveCar() { //loadCar
         val carId = intent.getStringExtra(ARG_ID) ?: ""
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -75,6 +78,24 @@ class CarDetailActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun deleteCar(){
+        CoroutineScope(Dispatchers.IO).launch{
+            val result = safeApiCall { RetrofitClient.apiService.deleteCar(car.id) }
+            withContext(Dispatchers.Main){
+                when (result){
+                    is Result.Error -> {
+                        Toast.makeText(this@CarDetailActivity,"Erro ao deletar", Toast.LENGTH_LONG).show()
+                    }
+                    is Result.Success -> {
+                        Toast.makeText(this@CarDetailActivity,"Car deletado", Toast.LENGTH_LONG).show()
+                        finish()
+                    }
+                }
+            }
+        }
+    }
+
    private fun handleSuccess() {
        binding.etName.setText(car.name)
        binding.etLicense.setText( car.license)
