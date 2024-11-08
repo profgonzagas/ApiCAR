@@ -51,6 +51,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupView() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            binding.swipeRefreshLayout.isRefreshing= true
+            fetchItems()
+        }
 
 
     }
@@ -69,11 +73,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fetchItems() {
+
         // Alterando execução para IO thread
         CoroutineScope(Dispatchers.IO).launch {
             val result = safeApiCall { RetrofitClient.apiService.getCars() }
             // Alterando execução para Main thread
             withContext(Dispatchers.Main) {
+                binding.swipeRefreshLayout.isRefreshing = false
                 when (result) {
                     is Result.Error -> {Toast.makeText(
                         this@MainActivity,
