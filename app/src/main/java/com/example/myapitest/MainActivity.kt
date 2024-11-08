@@ -18,6 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -55,9 +56,13 @@ class MainActivity : AppCompatActivity() {
             binding.swipeRefreshLayout.isRefreshing= true
             fetchItems()
         }
+        binding.addCta.setOnClickListener {
+            startActivity(NewCarActivity.newIntent(this))
+        }
 
 
     }
+
 
     private fun requestLocationPermission() {
         // TODO
