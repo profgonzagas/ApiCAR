@@ -15,6 +15,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.example.myapitest.service.Result
 import com.example.myapitest.model.Car
+import com.example.myapitest.ui.loadUrl
 
 class CarDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCarDetailBinding
@@ -105,7 +106,7 @@ class CarDetailActivity : AppCompatActivity() {
            car.place.lat.toString(),
            car.place.long.toString()
        )*/
-     //  binding.imageView.loadUrl(car.imageUrl)
+       binding.imageView.loadUrl(car.imageUrl)
    }
 
     companion object {

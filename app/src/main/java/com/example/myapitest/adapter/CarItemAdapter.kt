@@ -12,6 +12,7 @@ import com.example.myapitest.R
 import com.example.myapitest.model.Car
 import com.example.myapitest.ui.CircleTransform
 import com.squareup.picasso.Picasso
+import com.example.myapitest.ui.loadUrl
 
 //import com.example.myapitest.ui.loadUrl
 
@@ -44,7 +45,7 @@ class CarItemAdapter(
         holder.itemView.setOnClickListener{
             carClickListener.invoke(car)
         }
-       // holder.imageView.loadUrl(car.imageUrl)
+        holder.imageView.loadUrl(car.imageUrl)
         holder.model.text = car.name
         holder.year.text = car.year
         holder.license.text = car.license
@@ -52,7 +53,7 @@ class CarItemAdapter(
         Picasso.get().setIndicatorsEnabled(true)
          Picasso.get()
              .load(car.imageUrl)
-             .placeholder(R.drawable.ic_download)
+            .placeholder(R.drawable.ic_download)
              .error(R.drawable.ic_error)
              .transform(CircleTransform())
              .fit()
@@ -67,7 +68,7 @@ class CarItemAdapter(
                      Toast.makeText(holder.itemView.context, "Falha ao carregar a imagem", Toast.LENGTH_LONG).show()
                  }
              })
-
+        holder.imageView.loadUrl(car.imageUrl)
     }
 
 
